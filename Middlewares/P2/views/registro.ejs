@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sección registro</title>
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+    <%- include("partials/header.ejs") %>
+    <h2>Sección de Registro</h2>
+    <form method="POST" action="/user/registro">
+        <label for="">Nombre</label>
+        <input type="text" name="nombre">
+        <br>
+        <label for="">Edad</label>
+        <input type="text" name="edad">
+        <br>
+        <label for="">Email</label>
+        <input type="email" name="email">
+        <br>
+        <input type="submit" value="Registrar">
+        
+    </form>
+</body>
+</html>
