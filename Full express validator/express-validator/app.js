@@ -5,10 +5,17 @@ const app = express();
 const session = require("express-session");
 
 
+const cookieParser = require('cookie-parser');
+
+const recrdarmeMd = require("./middlewares/cookieAuthMiddleware");
+
 app.use(session({secret:"secret"}));
 
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.json());
+
+app.use(recrdarmeMd);
 
 app.use(express.static('./public'));
 app.listen(3000, () => console.log('Servidor levantado en el puerto 3000'));

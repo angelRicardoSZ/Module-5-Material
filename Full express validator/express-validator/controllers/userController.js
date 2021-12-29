@@ -47,19 +47,24 @@ const controller = {
 					// 	break;
 					if(req.body.password == usersJS[i].password){
 						usrlog = usersJS[i];
-						req.session.usrlogueado = usrlog;
+						
 						break;
 					}
 				}
 			}
-			const errorsP= {errors: [{msg: "Credenciales invalidas"}]}
-
+			req.session.usrlogueado = usrlog;
 			if(usrlog ==undefined  ){
 				return res.render("userLoginForm",{
-					errors2: [{msg: "Credenciales invalidas"}]
+					errors: [{msg: "Credenciales invalidas"}]
 					}
 				);
 			}
+
+			if(req.body.remember_user != undefined){
+				res.cookie("recordame", 
+				usrlog.email, {maxAge: 1000})
+			}
+
 			res.send("success");
 		}
 
