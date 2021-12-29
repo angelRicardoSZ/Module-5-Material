@@ -44,6 +44,16 @@ const validations = [
 	})
 ]
 
+
+const validations2 = [
+	body('email')
+		.notEmpty().withMessage('Tienes que escribir un correo electrónico').bail()
+		.isEmail().withMessage('Debes escribir un formato de correo válido'),
+	body('password').notEmpty().withMessage('Tienes que escribir una contraseña'),
+	
+]
+
+
 // Formulario de registro
 router.get('/register', usersController.register);
 
@@ -53,7 +63,18 @@ router.post('/register', uploadFile.single('avatar'), validations, usersControll
 // Formulario de login
 router.get('/login', usersController.login);
 
+router.post('/login', validations2, usersController.processLogin);
+
+
 // Perfil de Usuario
 router.get('/profile/:userId', usersController.profile);
+
+router.get("/check", function(req,res){
+	if(req.session.usrlogueado == undefined){
+		res.send("No estas logueado");
+	} else {
+		res.send("El usuario logueado es" + req.session.usrlogueado.email);
+	}
+})
 
 module.exports = router;
